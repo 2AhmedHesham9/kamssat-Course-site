@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار البرمجة الأولي</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary-color: #4e73df;
+            --secondary-color: #f8f9fc;
+            --accent-color: #2e59d9;
+            --text-color: #5a5c69;
+            --success-color: #1cc88a;
+            --warning-color: #f6c23e;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        .test-container {
+            margin-top: 3%;
+            animation: fadeIn 1s;
+        }
+
+        .test-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+            overflow: hidden;
+        }
+
+        .test-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .test-body {
+            padding: 2rem;
+            background-color: white;
+        }
+
+        .question-card {
+            border-left: 4px solid var(--primary-color);
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .question-card:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .option-label {
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #ddd;
+        }
+
+        .option-label:hover {
+            background-color: #e9ecef;
+        }
+
+        .option-input:checked+.option-label {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .progress {
+            height: 10px;
+            border-radius: 5px;
+        }
+
+        .progress-bar {
+            background-color: var(--primary-color);
+            transition: width 0.6s ease;
+        }
+
+        .btn-submit {
+            background-color: var(--success-color);
+            border: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #17a673;
+            transform: translateY(-2px);
+        }
+
+        .discount-badge {
+            background-color: var(--warning-color);
+            color: #000;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .result-modal {
+            display: none;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-color);
+            opacity: 0;
+            z-index: 1000;
+            animation: confetti 3s ease-out;
+        }
+
+        @keyframes confetti {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container test-container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card test-card animate__animated animate__fadeInUp">
+                    <div class="card-header test-header">
+                        <h3 class="animate__animated animate__fadeIn">اختبار البرمجة الأولي</h3>
+                        <p class="mb-0 animate__animated animate__fadeIn animate__delay-1s">
+                            <span class="discount-badge">خصم 20% عند تحقيق 60% أو أكثر</span>
+                        </p>
+                    </div>
+                    <div class="card-body test-body">
+                        <div class="alert alert-info animate__animated animate__fadeIn animate__delay-1s">
+                            <i class="fas fa-info-circle me-2"></i>
+                            هذا الاختبار يتكون من 5 أسئلة في مجال البرمجة. إذا حققت 60% أو أكثر ستحصل على خصم خاص!
+                        </div>
+
+                        <div class="progress mb-4">
+                            <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%"></div>
+                        </div>
+
+                        <form id="testForm">
+                            <div class="question-card animate__animated animate__fadeIn animate__delay-1s">
+                                <h5>1. ما هي لغة البرمجة التي تستخدم لإنشاء صفحات ويب تفاعلية؟</h5>
+                                <div class="options mt-3">
+                                    <input type="radio" name="q1" id="q1a" class="option-input" value="a">
+                                    <label for="q1a" class="option-label">أ) HTML</label>
+
+                                    <input type="radio" name="q1" id="q1b" class="option-input" value="b">
+                                    <label for="q1b" class="option-label">ب) CSS</label>
+
+                                    <input type="radio" name="q1" id="q1c" class="option-input" value="c">
+                                    <label for="q1c" class="option-label">ج) JavaScript</label>
+
+                                    <input type="radio" name="q1" id="q1d" class="option-input" value="d">
+                                    <label for="q1d" class="option-label">د) Python</label>
+                                </div>
+                            </div>
+
+                            <div class="question-card animate__animated animate__fadeIn animate__delay-1s">
+                                <h5>2. ما هي أداة التحكم في الإصدارات الأكثر شيوعًا؟</h5>
+                                <div class="options mt-3">
+                                    <input type="radio" name="q2" id="q2a" class="option-input" value="a">
+                                    <label for="q2a" class="option-label">أ) Git</label>
+
+                                    <input type="radio" name="q2" id="q2b" class="option-input" value="b">
+                                    <label for="q2b" class="option-label">ب) SVN</label>
+
+                                    <input type="radio" name="q2" id="q2c" class="option-input" value="c">
+                                    <label for="q2c" class="option-label">ج) Mercurial</label>
+
+                                    <input type="radio" name="q2" id="q2d" class="option-input" value="d">
+                                    <label for="q2d" class="option-label">د) CVS</label>
+                                </div>
+                            </div>
+
+                            <div class="question-card animate__animated animate__fadeIn animate__delay-1s">
+                                <h5>3. ما هي لغة الاستعلامات المستخدمة مع قواعد البيانات؟</h5>
+                                <div class="options mt-3">
+                                    <input type="radio" name="q3" id="q3a" class="option-input" value="a">
+                                    <label for="q3a" class="option-label">أ) SQL</label>
+
+                                    <input type="radio" name="q3" id="q3b" class="option-input" value="b">
+                                    <label for="q3b" class="option-label">ب) NoSQL</label>
+
+                                    <input type="radio" name="q3" id="q3c" class="option-input" value="c">
+                                    <label for="q3c" class="option-label">ج) GraphQL</label>
+
+                                    <input type="radio" name="q3" id="q3d" class="option-input" value="d">
+                                    <label for="q3d" class="option-label">د) MongoDB</label>
+                                </div>
+                            </div>
+
+                            <div class="question-card animate__animated animate__fadeIn animate__delay-1s">
+                                <h5>4. أي من هذه ليست إطار عمل JavaScript؟</h5>
+                                <div class="options mt-3">
+                                    <input type="radio" name="q4" id="q4a" class="option-input" value="a">
+                                    <label for="q4a" class="option-label">أ) React</label>
+
+                                    <input type="radio" name="q4" id="q4b" class="option-input" value="b">
+                                    <label for="q4b" class="option-label">ب) Angular</label>
+
+                                    <input type="radio" name="q4" id="q4c" class="option-input" value="c">
+                                    <label for="q4c" class="option-label">ج) Vue</label>
+
+                                    <input type="radio" name="q4" id="q4d" class="option-input" value="d">
+                                    <label for="q4d" class="option-label">د) Django</label>
+                                </div>
+                            </div>
+
+                            <div class="question-card animate__animated animate__fadeIn animate__delay-1s">
+                                <h5>5. ما هي طريقة تخزين البيانات على متصفح العميل؟</h5>
+                                <div class="options mt-3">
+                                    <input type="radio" name="q5" id="q5a" class="option-input" value="a">
+                                    <label for="q5a" class="option-label">أ) localStorage</label>
+
+                                    <input type="radio" name="q5" id="q5b" class="option-input" value="b">
+                                    <label for="q5b" class="option-label">ب) sessionStorage</label>
+
+                                    <input type="radio" name="q5" id="q5c" class="option-input" value="c">
+                                    <label for="q5c" class="option-label">ج) Cookies</label>
+
+                                    <input type="radio" name="q5" id="q5d" class="option-input" value="d">
+                                    <label for="q5d" class="option-label">د) جميع ما سبق</label>
+                                </div>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                <button type="submit"
+                                    class="btn btn-submit animate__animated animate__fadeIn animate__delay-2s">
+                                    <i class="fas fa-paper-plane me-2"></i> إرسال الإجابات
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Result Modal -->
+    <div class="modal fade" id="resultModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="resultTitle">نتيجة الاختبار</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="resultBody">
+                    <!-- Result content will be inserted here -->
+                </div>
+                <div class="modal-footer">
+                    <form id="emailForm" class="w-100">
+                        <div class="mb-3">
+                            <label for="userEmail" class="form-label">البريد الإلكتروني للحصول على النتيجة:</label>
+                            <input type="email" class="form-control" id="userEmail" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">إرسال</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Correct answers
+        const correctAnswers = {
+            q1: 'c',
+            q2: 'a',
+            q3: 'a',
+            q4: 'd',
+            q5: 'd'
+        };
+
+        // Update progress bar
+        document.querySelectorAll('.option-input').forEach(input => {
+            input.addEventListener('change', function () {
+                const answered = document.querySelectorAll('.option-input:checked').length;
+                const progress = (answered / 5) * 100;
+                document.getElementById('progressBar').style.width = `${progress}%`;
+            });
+        });
+
+        // Handle form submission
+        document.getElementById('testForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            let score = 0;
+            const userAnswers = {};
+
+            // Calculate score
+            for (let i = 1; i <= 5; i++) {
+                const questionName = `q${i}`;
+                const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+
+                if (selectedOption) {
+                    userAnswers[questionName] = selectedOption.value;
+                    if (selectedOption.value === correctAnswers[questionName]) {
+                        score++;
+                    }
+                }
+            }
+
+            const percentage = (score / 5) * 100;
+
+            // Show result modal
+            const resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
+            const resultTitle = document.getElementById('resultTitle');
+            const resultBody = document.getElementById('resultBody');
+
+            if (percentage >= 60) {
+                resultTitle.parentElement.className = 'modal-header bg-success text-white';
+                resultBody.innerHTML = `
+                    <div class="text-center">
+                        <i class="fas fa-trophy fa-4x text-success mb-3"></i>
+                        <h4 class="text-success">مبروك! لقد نجحت في الاختبار</h4>
+                        <p>لقد حصلت على ${score} من 5 (${percentage}%)</p>
+                        <div class="alert alert-success">
+                            <i class="fas fa-gift me-2"></i>
+                            لقد تأهلت للحصول على خصم 20% على جميع الدورات! أدخل بريدك الإلكتروني لاستلام العرض.
+                        </div>
+                    </div>
+                `;
+                createConfetti();
+            } else {
+                resultTitle.parentElement.className = 'modal-header bg-primary text-white';
+                resultBody.innerHTML = `
+                    <div class="text-center">
+                        <i class="fas fa-info-circle fa-4x text-primary mb-3"></i>
+                        <h4 class="text-primary">نتيجة الاختبار</h4>
+                        <p>لقد حصلت على ${score} من 5 (${percentage}%)</p>
+                        <div class="alert alert-info">
+                            للأسف لم تحقق النسبة المطلوبة للحصول على الخصم، لكن يمكنك التسجيل في دوراتنا لتحسين مهاراتك!
+                        </div>
+                    </div>
+                `;
+            }
+
+            resultModal.show();
+        });
+
+        // Handle email submission
+        document.getElementById('emailForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const email = document.getElementById('userEmail').value;
+
+            if (email) {
+                // Simulate sending data to server
+                const submitBtn = this.querySelector('button[type="submit"]');
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> جاري الإرسال...';
+                submitBtn.disabled = true;
+
+                setTimeout(() => {
+                    alert('تم إرسال النتيجة بنجاح إلى بريدك الإلكتروني!');
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+            }
+        });
+
+        // Create confetti effect
+        function createConfetti() {
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = `${Math.random() * 100}vw`;
+                confetti.style.backgroundColor = getRandomColor();
+                confetti.style.width = `${Math.random() * 10 + 5}px`;
+                confetti.style.height = `${Math.random() * 10 + 5}px`;
+                confetti.style.animationDelay = `${Math.random() * 2}s`;
+                document.body.appendChild(confetti);
+
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, 3000);
+            }
+        }
+
+        function getRandomColor() {
+            const colors = ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+    </script>
+</body>
+
+</html>

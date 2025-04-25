@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة التعلم الإلكتروني</title>
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary-color: #4e73df;
+            --secondary-color: #f8f9fc;
+            --accent-color: #2e59d9;
+            --text-color: #5a5c69;
+            --success-color: #1cc88a;
+            --warning-color: #f6c23e;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            padding-top: 70px;
+            /* لحساب ارتفاع النافبار الثابت */
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: white;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+            padding: 0.75rem 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            margin-left: 10px;
+        }
+
+        .nav-link {
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            color: var(--text-color);
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .btn-login {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-login:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+            margin-top: -70px;
+            padding-top: 120px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 2px, transparent 2px);
+            background-size: 30px 30px;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline-light {
+            transition: all 0.3s;
+        }
+
+        .btn-outline-light:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 0;
+            width: 50%;
+            height: 3px;
+            background: var(--primary-color);
+        }
+
+        .course-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            height: 100%;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .course-img {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .course-body {
+            padding: 1.5rem;
+            background-color: white;
+        }
+
+        .course-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .course-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--success-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .testimonial-card:before {
+            content: '\201C';
+            font-size: 5rem;
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            color: rgba(0, 0, 0, 0.05);
+            font-family: serif;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-left: 1rem;
+        }
+
+        /* Test Modal Styles */
+        .test-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .test-container {
+            background-color: white;
+            border-radius: 15px;
+            max-width: 800px;
+            margin: 2rem auto;
+            overflow: hidden;
+            animation: fadeInUp 0.5s;
+        }
+
+        .test-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .test-body {
+            padding: 2rem;
+        }
+
+        .question-card {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary-color);
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .option-label {
+            display: block;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #ddd;
+        }
+
+        .option-label:hover {
+            background-color: #e9ecef;
+        }
+
+        .option-input:checked+.option-label {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .progress {
+            height: 10px;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            background-color: var(--primary-color);
+            transition: width 0.6s ease;
+        }
+
+        .discount-badge {
+            background-color: var(--warning-color);
+            color: #000;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .floating-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .floating-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            background-color: var(--accent-color);
+        }
+
+        /* Email Form Styles */
+        .email-form {
+            margin-top: 2rem;
+        }
+
+        .email-form .form-control {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #d1d3e2;
+        }
+
+        .email-form .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+        }
+
+        .email-success {
+            display: none;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 3rem 0;
+            }
+
+            .course-card {
+                margin-bottom: 1.5rem;
+            }
+
+            .floating-btn {
+                bottom: 20px;
+                left: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .navbar-collapse {
+                background-color: white;
+                padding: 1rem;
+                margin-top: 10px;
+                border-radius: 0 0 10px 10px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://via.placeholder.com/40x40?text=LOGO" alt="Logo">
+                منصة التعلم
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">الرئيسية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#courses">الدورات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">من نحن</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">اتصل بنا</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="login.html" class="btn btn-login">
+                        <i class="fas fa-sign-in-alt me-2"></i> تسجيل الدخول
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-bg-pattern"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInDown">طور مهاراتك مع منصة التعلم
+                        الإلكتروني</h1>
+                    <p class="lead mb-5 animate__animated animate__fadeInDown animate__delay-1s">انضم إلى آلاف الطلاب
+                        الذين طوروا مهاراتهم وحققوا أحلامهم من خلال دوراتنا التدريبية المتميزة</p>
+                    <div class="d-flex gap-3 animate__animated animate__fadeInDown animate__delay-2s">
+                        <a href="login.html" class="btn btn-primary btn-lg">
+                            <i class="fas fa-sign-in-alt me-2"></i> تسجيل الدخول
+                        </a>
+                        <a href="#courses" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-book-open me-2"></i> تصفح الدورات
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block animate__animated animate__fadeIn animate__delay-1s">
+                    <img src="https://imageio.forbes.com/specials-images/imageserve/616b417b794907a4b85f89b3/Colourful-cubes-going-into-a-head-graphic-showing-importance-of-learning-/960x0.jpg?format=jpg&width=1440" alt="Online Learning"
+                        class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="py-5" id="courses">
+        <div class="container">
+            <h2 class="text-center section-title animate__animated animate__fadeIn">الدورات المتاحة</h2>
+            <p class="text-center mb-5 animate__animated animate__fadeIn animate__delay-1s">اختر من بين أفضل الدورات
+                التدريبية في مختلف المجالات</p>
+
+            <div class="row">
+                <!-- Course 1 -->
+                <div class="col-md-4 animate__animated animate__fadeInUp">
+                    <div class="course-card">
+                        <div class="course-img"
+                            style="background-image: url('https://via.placeholder.com/400x300?text=Web+Development')">
+                        </div>
+                        <div class="course-body">
+                            <div class="course-badge">الأكثر طلباً</div>
+                            <h4 class="course-title">تطوير الويب الشامل</h4>
+                            <p class="text-muted">تعلم تطوير مواقع الويب باستخدام أحدث التقنيات</p>
+                            <div class="course-meta">
+                                <span><i class="fas fa-clock me-2"></i> 30 ساعة</span>
+                                <span><i class="fas fa-user-graduate me-2"></i> 250 طالب</span>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary w-100 start-test" data-course="web">عرض
+                                التفاصيل</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 2 -->
+                <div class="col-md-4 animate__animated animate__fadeInUp animate__delay-1s">
+                    <div class="course-card">
+                        <div class="course-img"
+                            style="background-image: url('https://via.placeholder.com/400x300?text=JavaScript')"></div>
+                        <div class="course-body">
+                            <h4 class="course-title">JavaScript المتقدم</h4>
+                            <p class="text-muted">أتقن JavaScript وتعلم أحدث الميزات</p>
+                            <div class="course-meta">
+                                <span><i class="fas fa-clock me-2"></i> 25 ساعة</span>
+                                <span><i class="fas fa-user-graduate me-2"></i> 180 طالب</span>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary w-100 start-test" data-course="javascript">عرض
+                                التفاصيل</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 3 -->
+                <div class="col-md-4 animate__animated animate__fadeInUp animate__delay-2s">
+                    <div class="course-card">
+                        <div class="course-img"
+                            style="background-image: url('https://via.placeholder.com/400x300?text=Python')"></div>
+                        <div class="course-body">
+                            <div class="course-badge">جديد</div>
+                            <h4 class="course-title">برمجة Python</h4>
+                            <p class="text-muted">تعلم Python من الصفر إلى الاحتراف</p>
+                            <div class="course-meta">
+                                <span><i class="fas fa-clock me-2"></i> 20 ساعة</span>
+                                <span><i class="fas fa-user-graduate me-2"></i> 120 طالب</span>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary w-100 start-test" data-course="python">عرض
+                                التفاصيل</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5 animate__animated animate__fadeIn animate__delay-3s">
+                <a href="courses.html" class="btn btn-primary btn-lg">
+                    <i class="fas fa-book me-2"></i> عرض جميع الدورات
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center section-title animate__animated animate__fadeIn">آراء طلابنا</h2>
+            <p class="text-center mb-5 animate__animated animate__fadeIn animate__delay-1s">ما يقوله طلابنا عن تجربتهم
+                مع المنصة</p>
+
+            <div class="row">
+                <div class="col-md-4 animate__animated animate__fadeInUp">
+                    <div class="testimonial-card">
+                        <p class="mb-4">"لقد ساعدتني هذه المنصة على تعلم تطوير الويب في وقت قصير، والآن أعمل كمطور ويب
+                            في شركة كبيرة."</p>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ahmed Mohamed">
+                            <div>
+                                <h6 class="mb-0">أحمد محمد</h6>
+                                <small class="text-muted">مطور ويب</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 animate__animated animate__fadeInUp animate__delay-1s">
+                    <div class="testimonial-card">
+                        <p class="mb-4">"الدورات ممتازة والشرح واضح جداً، أنصح أي شخص يريد تعلم البرمجة أن يبدأ من هنا."
+                        </p>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sara Ali">
+                            <div>
+                                <h6 class="mb-0">سارة علي</h6>
+                                <small class="text-muted">طالبة علوم حاسب</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 animate__animated animate__fadeInUp animate__delay-2s">
+                    <div class="testimonial-card">
+                        <p class="mb-4">"حقاً منصة رائعة، لقد حصلت على وظيفة أحلامي بعد إكمال دورة JavaScript المتقدم."
+                        </p>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Omar Ibrahim">
+                            <div>
+                                <h6 class="mb-0">عمر إبراهيم</h6>
+                                <small class="text-muted">مطور تطبيقات</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Test Modal -->
+    <div class="test-modal" id="testModal">
+        <div class="test-container">
+            <div class="test-header">
+                <h3 class="mb-3">اختبار البرمجة الأولي</h3>
+                <span class="discount-badge">خصم 20% عند تحقيق 60% أو أكثر</span>
+                <p class="mb-0">هذا الاختبار يتكون من 5 أسئلة في مجال البرمجة</p>
+            </div>
+            <div class="test-body">
+                <div class="progress">
+                    <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%"></div>
+                </div>
+
+                <form id="testForm">
+                    <div class="question-card">
+                        <h5>1. ما هي لغة البرمجة التي تستخدم لإنشاء صفحات ويب تفاعلية؟</h5>
+                        <div class="options mt-3">
+                            <input type="radio" name="q1" id="q1a" class="option-input" value="a">
+                            <label for="q1a" class="option-label">أ) HTML</label>
+
+                            <input type="radio" name="q1" id="q1b" class="option-input" value="b">
+                            <label for="q1b" class="option-label">ب) CSS</label>
+
+                            <input type="radio" name="q1" id="q1c" class="option-input" value="c">
+                            <label for="q1c" class="option-label">ج) JavaScript</label>
+
+                            <input type="radio" name="q1" id="q1d" class="option-input" value="d">
+                            <label for="q1d" class="option-label">د) Python</label>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <h5>2. ما هي أداة التحكم في الإصدارات الأكثر شيوعًا؟</h5>
+                        <div class="options mt-3">
+                            <input type="radio" name="q2" id="q2a" class="option-input" value="a">
+                            <label for="q2a" class="option-label">أ) Git</label>
+
+                            <input type="radio" name="q2" id="q2b" class="option-input" value="b">
+                            <label for="q2b" class="option-label">ب) SVN</label>
+
+                            <input type="radio" name="q2" id="q2c" class="option-input" value="c">
+                            <label for="q2c" class="option-label">ج) Mercurial</label>
+
+                            <input type="radio" name="q2" id="q2d" class="option-input" value="d">
+                            <label for="q2d" class="option-label">د) CVS</label>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <h5>3. ما هي لغة الاستعلامات المستخدمة مع قواعد البيانات؟</h5>
+                        <div class="options mt-3">
+                            <input type="radio" name="q3" id="q3a" class="option-input" value="a">
+                            <label for="q3a" class="option-label">أ) SQL</label>
+
+                            <input type="radio" name="q3" id="q3b" class="option-input" value="b">
+                            <label for="q3b" class="option-label">ب) NoSQL</label>
+
+                            <input type="radio" name="q3" id="q3c" class="option-input" value="c">
+                            <label for="q3c" class="option-label">ج) GraphQL</label>
+
+                            <input type="radio" name="q3" id="q3d" class="option-input" value="d">
+                            <label for="q3d" class="option-label">د) MongoDB</label>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <h5>4. أي من هذه ليست إطار عمل JavaScript؟</h5>
+                        <div class="options mt-3">
+                            <input type="radio" name="q4" id="q4a" class="option-input" value="a">
+                            <label for="q4a" class="option-label">أ) React</label>
+
+                            <input type="radio" name="q4" id="q4b" class="option-input" value="b">
+                            <label for="q4b" class="option-label">ب) Angular</label>
+
+                            <input type="radio" name="q4" id="q4c" class="option-input" value="c">
+                            <label for="q4c" class="option-label">ج) Vue</label>
+
+                            <input type="radio" name="q4" id="q4d" class="option-input" value="d">
+                            <label for="q4d" class="option-label">د) Django</label>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <h5>5. ما هي طريقة تخزين البيانات على متصفح العميل؟</h5>
+                        <div class="options mt-3">
+                            <input type="radio" name="q5" id="q5a" class="option-input" value="a">
+                            <label for="q5a" class="option-label">أ) localStorage</label>
+
+                            <input type="radio" name="q5" id="q5b" class="option-input" value="b">
+                            <label for="q5b" class="option-label">ب) sessionStorage</label>
+
+                            <input type="radio" name="q5" id="q5c" class="option-input" value="c">
+                            <label for="q5c" class="option-label">ج) Cookies</label>
+
+                            <input type="radio" name="q5" id="q5d" class="option-input" value="d">
+                            <label for="q5d" class="option-label">د) جميع ما سبق</label>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane me-2"></i> إرسال الإجابات
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary ms-2" id="closeTest">
+                            <i class="fas fa-times me-2"></i> إغلاق
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Result Modal -->
+    <div class="test-modal" id="resultModal">
+        <div class="test-container" style="max-width: 600px;">
+            <div class="test-header">
+                <h3 class="mb-3">نتيجة الاختبار</h3>
+            </div>
+            <div class="test-body text-center">
+                <i class="fas fa-check-circle fa-5x text-success mb-4" id="resultIcon"></i>
+                <h4 class="text-success mb-3" id="resultTitle">مبروك! لقد أكملت الاختبار</h4>
+                <p class="fs-5" id="resultText">لقد حصلت على 4 من 5 (80%)</p>
+
+                <div class="alert alert-success mt-4" id="discountAlert">
+                    <i class="fas fa-gift me-2"></i>
+                    لقد تأهلت للحصول على خصم 20% على جميع الدورات!
+                </div>
+
+                <form id="emailForm" class="email-form">
+                    <div class="mb-3">
+                        <label for="userEmail" class="form-label">أدخل بريدك الإلكتروني لاستلام النتيجة:</label>
+                        <input type="email" class="form-control" id="userEmail" placeholder="example@email.com"
+                            required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-paper-plane me-2"></i> إرسال النتيجة
+                    </button>
+                </form>
+
+                <div class="alert alert-success mt-3 d-none" id="emailSuccessAlert">
+                    <i class="fas fa-check-circle me-2"></i>
+                    تم إرسال النتيجة بنجاح إلى بريدك الإلكتروني!
+                </div>
+
+                <button class="btn btn-outline-secondary mt-3" id="closeResult">
+                    <i class="fas fa-times me-2"></i> إغلاق
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Test Button -->
+    <div class="floating-btn animate__animated animate__bounceIn animate__delay-3s" id="floatingTestBtn">
+        <i class="fas fa-question"></i>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Correct answers
+        const correctAnswers = {
+            q1: 'c',
+            q2: 'a',
+            q3: 'a',
+            q4: 'd',
+            q5: 'd'
+        };
+
+        // DOM Elements
+        const testModal = document.getElementById('testModal');
+        const resultModal = document.getElementById('resultModal');
+        const floatingTestBtn = document.getElementById('floatingTestBtn');
+        const closeTestBtn = document.getElementById('closeTest');
+        const closeResultBtn = document.getElementById('closeResult');
+        const testForm = document.getElementById('testForm');
+        const emailForm = document.getElementById('emailForm');
+        const progressBar = document.getElementById('progressBar');
+        const resultText = document.getElementById('resultText');
+        const resultTitle = document.getElementById('resultTitle');
+        const resultIcon = document.getElementById('resultIcon');
+        const discountAlert = document.getElementById('discountAlert');
+        const emailSuccessAlert = document.getElementById('emailSuccessAlert');
+        const userEmail = document.getElementById('userEmail');
+
+        // Show test modal
+        function showTestModal() {
+            testModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+
+            // Reset form
+            testForm.reset();
+            progressBar.style.width = '0%';
+        }
+
+        // Close test modal
+        function closeTestModal() {
+            testModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Show result modal
+        function showResultModal(score, total) {
+            const percentage = (score / total) * 100;
+            resultText.textContent = `لقد حصلت على ${score} من ${total} (${percentage.toFixed(0)}%)`;
+
+            if (percentage < 60) {
+                discountAlert.style.display = 'none';
+                resultIcon.className = 'fas fa-info-circle fa-5x text-primary mb-4';
+                resultTitle.className = 'text-primary mb-3';
+                resultTitle.textContent = 'نتيجة الاختبار';
+            } else {
+                discountAlert.style.display = 'block';
+                resultIcon.className = 'fas fa-check-circle fa-5x text-success mb-4';
+                resultTitle.className = 'text-success mb-3';
+                resultTitle.textContent = 'مبروك! لقد نجحت في الاختبار';
+            }
+
+            // Reset email form
+            emailForm.reset();
+            emailForm.style.display = 'block';
+            emailSuccessAlert.classList.add('d-none');
+
+            resultModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close result modal
+        function closeResultModal() {
+            resultModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Event Listeners
+        floatingTestBtn.addEventListener('click', showTestModal);
+        closeTestBtn.addEventListener('click', closeTestModal);
+        closeResultBtn.addEventListener('click', closeResultModal);
+
+        // Start test from course buttons
+        document.querySelectorAll('.start-test').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                showTestModal();
+            });
+        });
+
+        // Update progress bar
+        document.querySelectorAll('.option-input').forEach(input => {
+            input.addEventListener('change', function () {
+                const answered = document.querySelectorAll('.option-input:checked').length;
+                const progress = (answered / 5) * 100;
+                progressBar.style.width = `${progress}%`;
+            });
+        });
+
+        // Handle test form submission
+        testForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            let score = 0;
+            const userAnswers = {};
+
+            // Calculate score
+            for (let i = 1; i <= 5; i++) {
+                const questionName = `q${i}`;
+                const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+
+                if (selectedOption) {
+                    userAnswers[questionName] = selectedOption.value;
+                    if (selectedOption.value === correctAnswers[questionName]) {
+                        score++;
+                    }
+                }
+            }
+
+            closeTestModal();
+            showResultModal(score, 5);
+        });
+
+        // Handle email form submission
+        emailForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const email = userEmail.value;
+
+            if (email) {
+                // Show loading state
+                const submitBtn = this.querySelector('button[type="submit"]');
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> جاري الإرسال...';
+                submitBtn.disabled = true;
+
+                // Simulate sending email (in a real app, you would use AJAX here)
+                setTimeout(() => {
+                    // Show success message
+                    emailForm.style.display = 'none';
+                    emailSuccessAlert.classList.remove('d-none');
+
+                    // In a real application, you would send the email and test results to your server
+                    console.log('Email sent to:', email);
+                    console.log('Test results:', resultText.textContent);
+
+                    // Reset button
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane me-2"></i> إرسال النتيجة';
+                    submitBtn.disabled = false;
+                }, 1500);
+            }
+        });
+
+        // Show test modal on page load (for demo purposes)
+        window.addEventListener('load', function () {
+            // Check if this is the first visit
+            if (!localStorage.getItem('testShown')) {
+                setTimeout(() => {
+                    showTestModal();
+                    localStorage.setItem('testShown', 'true');
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+
+</html>
