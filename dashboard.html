@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,13 +18,13 @@
             --warning-color: #f6c23e;
             --dark-color: #5a5c69;
         }
-        
+
         body {
             font-family: 'Tajawal', sans-serif;
             background-color: var(--secondary-color);
             color: var(--text-color);
         }
-        
+
         .sidebar {
             background: linear-gradient(180deg, var(--primary-color), var(--accent-color));
             min-height: 100vh;
@@ -33,57 +34,59 @@
             position: fixed;
             z-index: 1000;
         }
-        
+
         @media (max-width: 992px) {
             .sidebar {
                 width: 0;
                 overflow: hidden;
             }
+
             .sidebar.active {
                 width: 250px;
             }
+
             .main-content {
                 margin-right: 0 !important;
             }
         }
-        
+
         .sidebar-header {
             padding: 1.5rem;
-            background-color: rgba(0,0,0,0.1);
+            background-color: rgba(0, 0, 0, 0.1);
         }
-        
+
         .sidebar-menu {
             padding: 0;
             list-style: none;
         }
-        
+
         .sidebar-menu li {
             padding: 0.75rem 1.5rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s;
         }
-        
+
         .sidebar-menu li:hover {
-            background-color: rgba(255,255,255,0.1);
+            background-color: rgba(255, 255, 255, 0.1);
             padding-right: 2rem;
         }
-        
+
         .sidebar-menu li a {
             color: white;
             text-decoration: none;
             display: block;
         }
-        
+
         .sidebar-menu li i {
             margin-left: 10px;
         }
-        
+
         .main-content {
             margin-right: 250px;
             padding: 20px;
             transition: all 0.3s;
         }
-        
+
         .top-bar {
             background-color: white;
             padding: 15px;
@@ -94,7 +97,7 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .menu-toggle {
             display: none;
             background: none;
@@ -102,18 +105,18 @@
             font-size: 1.5rem;
             color: var(--text-color);
         }
-        
+
         @media (max-width: 992px) {
             .menu-toggle {
                 display: block;
             }
         }
-        
+
         .user-profile {
             display: flex;
             align-items: center;
         }
-        
+
         .user-avatar {
             width: 40px;
             height: 40px;
@@ -125,7 +128,7 @@
             justify-content: center;
             margin-left: 10px;
         }
-        
+
         .card {
             border: none;
             border-radius: 10px;
@@ -133,71 +136,71 @@
             margin-bottom: 20px;
             transition: all 0.3s;
         }
-        
-        .card:hover {
+
+        < !-- .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 0.5rem 1.5rem 0 rgba(58, 59, 69, 0.2);
         }
-        
-        .card-header {
+
+        -->.card-header {
             background-color: white;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             font-weight: bold;
             padding: 15px;
             border-radius: 10px 10px 0 0 !important;
         }
-        
+
         .card-body {
             padding: 20px;
         }
-        
+
         .course-card {
             position: relative;
             overflow: hidden;
             height: 100%;
         }
-        
+
         .course-img {
             height: 150px;
             background-size: cover;
             background-position: center;
         }
-        
+
         .course-title {
             font-weight: bold;
             margin: 10px 0;
         }
-        
+
         .course-progress {
             height: 5px;
             background-color: #e9ecef;
             border-radius: 5px;
             margin: 10px 0;
         }
-        
+
         .course-progress-bar {
             height: 100%;
             border-radius: 5px;
             background-color: var(--primary-color);
             transition: width 1s ease;
         }
-        
+
         .badge-completed {
             background-color: var(--success-color);
         }
-        
+
         .badge-inprogress {
             background-color: var(--warning-color);
             color: #000;
         }
-        
+
         .locked-course {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0,0,0,0.7);
+            background-color: rgba(0, 0, 0, 0.7);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -205,63 +208,64 @@
             font-size: 2rem;
             border-radius: 10px;
         }
-        
+
         .stats-card {
             text-align: center;
             padding: 20px;
         }
-        
+
         .stats-icon {
             font-size: 2rem;
             margin-bottom: 10px;
             color: var(--primary-color);
         }
-        
+
         .stats-number {
             font-size: 1.5rem;
             font-weight: bold;
         }
-        
+
         .stats-text {
             color: var(--dark-color);
         }
-        
+
         .test-item {
             padding: 15px;
             border-bottom: 1px solid #eee;
             transition: all 0.3s;
         }
-        
-        .test-item:hover {
+
+        < !-- .test-item:hover {
             background-color: #f8f9fa;
         }
-        
-        .test-score {
+
+        -->.test-score {
             font-weight: bold;
             color: var(--success-color);
         }
-        
+
+        < !-- 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        
-        .animate-card {
-            animation: fadeIn 0.5s forwards;
-        }
-        
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.4s; }
-        
+
+        -->
+
         /* Blog and Test Styles */
         .blog-container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
         }
-        
+
         .blog-content {
             background-color: white;
             border-radius: 10px;
@@ -269,14 +273,14 @@
             box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
             margin-bottom: 30px;
         }
-        
+
         .test-container {
             background-color: white;
             border-radius: 10px;
             padding: 30px;
             box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
         }
-        
+
         .question-card {
             margin-bottom: 20px;
             padding: 20px;
@@ -284,7 +288,7 @@
             background-color: #f8f9fa;
             border-radius: 8px;
         }
-        
+
         .option-label {
             display: block;
             padding: 10px;
@@ -294,22 +298,23 @@
             transition: all 0.2s;
             border: 1px solid #ddd;
         }
-        
-        .option-label:hover {
+
+        < !-- .option-label:hover {
             background-color: #e9ecef;
         }
-        
-        .option-input:checked + .option-label {
+
+        -->.option-input:checked+.option-label {
             background-color: var(--primary-color);
             color: white;
             border-color: var(--primary-color);
         }
-        
+
         .result-alert {
             display: none;
         }
     </style>
 </head>
+
 <body>
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
@@ -361,7 +366,7 @@
             </li>
         </ul>
     </div>
-    
+
     <!-- Main Content -->
     <div class="main-content" id="mainContent">
         <!-- Top Bar -->
@@ -377,12 +382,12 @@
                 <span>محمد أحمد</span>
             </div>
         </div>
-        
+
         <!-- Dashboard Page -->
         <div class="page-content" id="dashboardPage">
             <!-- Stats Cards -->
             <div class="row mb-4">
-                <div class="col-md-4 animate-card delay-1">
+                <div class="col-md-4 ">
                     <div class="card stats-card">
                         <div class="stats-icon">
                             <i class="fas fa-book"></i>
@@ -391,7 +396,7 @@
                         <div class="stats-text">الدورات المتاحة</div>
                     </div>
                 </div>
-                <div class="col-md-4 animate-card delay-2">
+                <div class="col-md-4 ">
                     <div class="card stats-card">
                         <div class="stats-icon">
                             <i class="fas fa-check-circle"></i>
@@ -400,7 +405,7 @@
                         <div class="stats-text">الدورات المكتملة</div>
                     </div>
                 </div>
-                <div class="col-md-4 animate-card delay-3">
+                <div class="col-md-4 ">
                     <div class="card stats-card">
                         <div class="stats-icon">
                             <i class="fas fa-trophy"></i>
@@ -410,11 +415,11 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Courses Section -->
             <div class="row mb-4">
                 <div class="col-12">
-                    <div class="card animate-card delay-4">
+                    <div class="card  delay-4">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <span>الدورات التدريبية</span>
                             <a href="#" class="btn btn-sm btn-outline-primary" data-page="courses">عرض الكل</a>
@@ -424,7 +429,9 @@
                                 <!-- Course 1 -->
                                 <div class="col-md-4 mb-4">
                                     <div class="card course-card">
-                                        <div class="course-img" style="background-image: url('https://via.placeholder.com/300x150?text=Web+Development')"></div>
+                                        <div class="course-img"
+                                            style="background-image: url('https://via.placeholder.com/300x150?text=Web+Development')">
+                                        </div>
                                         <div class="card-body">
                                             <h5 class="course-title">تطوير الويب للمبتدئين</h5>
                                             <p>تعلم أساسيات تطوير الويب باستخدام HTML, CSS, وJavaScript</p>
@@ -433,16 +440,38 @@
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <span class="badge badge-completed">مكتمل</span>
-                                                <button class="btn btn-sm btn-outline-primary view-course" data-course="web-development">عرض الدورة</button>
+                                                <button class="btn btn-sm btn-outline-primary view-course"
+                                                    data-course="web-development">عرض الدورة</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                
+                                <div class="col-md-4 mb-4">
+                                    <div class="card course-card">
+                                        <div class="course-img"
+                                            style="background-image: url('https://via.placeholder.com/300x150?text=Web+Development')">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="course-title">تطوير الويب للمبتدئين</h5>
+                                            <p>تعلم أساسيات تطوير الويب باستخدام HTML, CSS, وJavaScript</p>
+                                            <div class="course-progress">
+                                                <div class="course-progress-bar" style="width: 100%"></div>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span class="badge badge-completed">مكتمل</span>
+                                                <button class="btn btn-sm btn-outline-primary view-course"
+                                                    data-course="web-development">عرض الدورة</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!-- Course 2 -->
                                 <div class="col-md-4 mb-4">
                                     <div class="card course-card">
-                                        <div class="course-img" style="background-image: url('https://via.placeholder.com/300x150?text=JavaScript')"></div>
+                                        <div class="course-img"
+                                            style="background-image: url('https://via.placeholder.com/300x150?text=JavaScript')">
+                                        </div>
                                         <div class="card-body">
                                             <h5 class="course-title">JavaScript المتقدم</h5>
                                             <p>تعلم مفاهيم JavaScript المتقدمة مثل ES6، الوعد، وغيرها</p>
@@ -451,16 +480,84 @@
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <span class="badge badge-inprogress">قيد التقدم</span>
-                                                <button class="btn btn-sm btn-outline-primary view-course" data-course="javascript">استكمال الدورة</button>
+                                                <button class="btn btn-sm btn-outline-primary view-course"
+                                                    data-course="javascript">استكمال الدورة</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                
+                                <!-- Course 2 -->
+                                <div class="col-md-4 mb-4">
+                                    <div class="card course-card">
+                                        <div class="course-img"
+                                            style="background-image: url('https://via.placeholder.com/300x150?text=JavaScript')">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="course-title">JavaScript المتقدم</h5>
+                                            <p>تعلم مفاهيم JavaScript المتقدمة مثل ES6، الوعد، وغيرها</p>
+                                            <div class="course-progress">
+                                                <div class="course-progress-bar" style="width: 65%"></div>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span class="badge badge-inprogress">قيد التقدم</span>
+                                                <button class="btn btn-sm btn-outline-primary view-course"
+                                                    data-course="javascript">استكمال الدورة</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!-- Course 3 (Locked) -->
                                 <div class="col-md-4 mb-4">
                                     <div class="card course-card">
-                                        <div class="course-img" style="background-image: url('https://via.placeholder.com/300x150?text=React')"></div>
+                                        <div class="course-img"
+                                            style="background-image: url('https://via.placeholder.com/300x150?text=React')">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="course-title">إطار عمل React</h5>
+                                            <p>تعلم كيفية بناء تطبيقات ويب باستخدام React.js</p>
+                                            <div class="locked-course">
+                                                <i class="fas fa-lock"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Course 3 (Locked) -->
+                                <div class="col-md-4 mb-4">
+                                    <div class="card course-card">
+                                        <div class="course-img"
+                                            style="background-image: url('https://via.placeholder.com/300x150?text=React')">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="course-title">إطار عمل React</h5>
+                                            <p>تعلم كيفية بناء تطبيقات ويب باستخدام React.js</p>
+                                            <div class="locked-course">
+                                                <i class="fas fa-lock"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Course 3 (Locked) -->
+                                <div class="col-md-4 mb-4">
+                                    <div class="card course-card">
+                                        <div class="course-img"
+                                            style="background-image: url('https://via.placeholder.com/300x150?text=React')">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="course-title">إطار عمل React</h5>
+                                            <p>تعلم كيفية بناء تطبيقات ويب باستخدام React.js</p>
+                                            <div class="locked-course">
+                                                <i class="fas fa-lock"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Course 3 (Locked) -->
+                                <div class="col-md-4 mb-4">
+                                    <div class="card course-card">
+                                        <div class="course-img"
+                                            style="background-image: url('https://via.placeholder.com/300x150?text=React')">
+                                        </div>
                                         <div class="card-body">
                                             <h5 class="course-title">إطار عمل React</h5>
                                             <p>تعلم كيفية بناء تطبيقات ويب باستخدام React.js</p>
@@ -475,7 +572,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Recent Tests Section -->
             <div class="row">
                 <div class="col-md-6">
@@ -508,7 +605,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
@@ -532,7 +629,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Courses Page -->
         <div class="page-content d-none" id="coursesPage">
             <div class="card">
@@ -544,7 +641,9 @@
                         <!-- Course 1 -->
                         <div class="col-md-4 mb-4">
                             <div class="card course-card">
-                                <div class="course-img" style="background-image: url('https://via.placeholder.com/300x150?text=Web+Development')"></div>
+                                <div class="course-img"
+                                    style="background-image: url('https://via.placeholder.com/300x150?text=Web+Development')">
+                                </div>
                                 <div class="card-body">
                                     <h5 class="course-title">تطوير الويب للمبتدئين</h5>
                                     <p>تعلم أساسيات تطوير الويب باستخدام HTML, CSS, وJavaScript</p>
@@ -553,16 +652,19 @@
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <span class="badge badge-completed">مكتمل</span>
-                                        <button class="btn btn-sm btn-outline-primary view-course" data-course="web-development">عرض الدورة</button>
+                                        <button class="btn btn-sm btn-outline-primary view-course"
+                                            data-course="web-development">عرض الدورة</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Course 2 -->
                         <div class="col-md-4 mb-4">
                             <div class="card course-card">
-                                <div class="course-img" style="background-image: url('https://via.placeholder.com/300x150?text=JavaScript')"></div>
+                                <div class="course-img"
+                                    style="background-image: url('https://via.placeholder.com/300x150?text=JavaScript')">
+                                </div>
                                 <div class="card-body">
                                     <h5 class="course-title">JavaScript المتقدم</h5>
                                     <p>تعلم مفاهيم JavaScript المتقدمة مثل ES6، الوعد، وغيرها</p>
@@ -571,16 +673,19 @@
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <span class="badge badge-inprogress">قيد التقدم</span>
-                                        <button class="btn btn-sm btn-outline-primary view-course" data-course="javascript">استكمال الدورة</button>
+                                        <button class="btn btn-sm btn-outline-primary view-course"
+                                            data-course="javascript">استكمال الدورة</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Course 3 (Locked) -->
                         <div class="col-md-4 mb-4">
                             <div class="card course-card">
-                                <div class="course-img" style="background-image: url('https://via.placeholder.com/300x150?text=React')"></div>
+                                <div class="course-img"
+                                    style="background-image: url('https://via.placeholder.com/300x150?text=React')">
+                                </div>
                                 <div class="card-body">
                                     <h5 class="course-title">إطار عمل React</h5>
                                     <p>تعلم كيفية بناء تطبيقات ويب باستخدام React.js</p>
@@ -590,11 +695,13 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Course 4 -->
                         <div class="col-md-4 mb-4">
                             <div class="card course-card">
-                                <div class="course-img" style="background-image: url('https://via.placeholder.com/300x150?text=Python')"></div>
+                                <div class="course-img"
+                                    style="background-image: url('https://via.placeholder.com/300x150?text=Python')">
+                                </div>
                                 <div class="card-body">
                                     <h5 class="course-title">تعلم Python من الصفر</h5>
                                     <p>أساسيات لغة Python للمبتدئين</p>
@@ -603,16 +710,19 @@
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <span class="badge bg-secondary">لم يبدأ</span>
-                                        <button class="btn btn-sm btn-outline-primary view-course" data-course="python">بدء الدورة</button>
+                                        <button class="btn btn-sm btn-outline-primary view-course"
+                                            data-course="python">بدء الدورة</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Course 5 -->
                         <div class="col-md-4 mb-4">
                             <div class="card course-card">
-                                <div class="course-img" style="background-image: url('https://via.placeholder.com/300x150?text=Database')"></div>
+                                <div class="course-img"
+                                    style="background-image: url('https://via.placeholder.com/300x150?text=Database')">
+                                </div>
                                 <div class="card-body">
                                     <h5 class="course-title">قواعد البيانات SQL</h5>
                                     <p>تعلم تصميم وإدارة قواعد البيانات</p>
@@ -621,7 +731,8 @@
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <span class="badge badge-inprogress">قيد التقدم</span>
-                                        <button class="btn btn-sm btn-outline-primary view-course" data-course="sql">استكمال الدورة</button>
+                                        <button class="btn btn-sm btn-outline-primary view-course"
+                                            data-course="sql">استكمال الدورة</button>
                                     </div>
                                 </div>
                             </div>
@@ -630,7 +741,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Course Detail Page -->
         <div class="page-content d-none" id="courseDetailPage">
             <div class="blog-container">
@@ -640,11 +751,11 @@
                         <i class="fas fa-arrow-right me-2"></i> العودة للدورات
                     </button>
                 </div>
-                
+
                 <div class="blog-content" id="blogContent">
                     <!-- Blog content will be loaded here -->
                 </div>
-                
+
                 <div class="test-container d-none" id="testContainer">
                     <h5 class="mb-4">اختبار نهاية المدونة</h5>
                     <form id="blogTestForm">
@@ -656,7 +767,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Other Pages (Placeholders) -->
         <div class="page-content d-none" id="testsPage">
             <div class="card">
@@ -668,7 +779,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="page-content d-none" id="certificatesPage">
             <div class="card">
                 <div class="card-header">
@@ -679,7 +790,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="page-content d-none" id="profilePage">
             <div class="card">
                 <div class="card-header">
@@ -690,7 +801,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="page-content d-none" id="settingsPage">
             <div class="card">
                 <div class="card-header">
@@ -951,16 +1062,16 @@
         };
 
         // Initialize the dashboard
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Menu toggle for mobile
-            menuToggle.addEventListener('click', function() {
+            menuToggle.addEventListener('click', function () {
                 sidebar.classList.toggle('active');
             });
 
             // Navigation links
             document.querySelectorAll('.sidebar-menu li a').forEach(link => {
                 if (link.getAttribute('data-page')) {
-                    link.addEventListener('click', function(e) {
+                    link.addEventListener('click', function (e) {
                         e.preventDefault();
                         navigateTo(this.getAttribute('data-page'));
                         if (window.innerWidth <= 992) {
@@ -972,20 +1083,20 @@
 
             // View course buttons
             document.querySelectorAll('.view-course').forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     const courseId = this.getAttribute('data-course');
                     loadCourse(courseId);
                 });
             });
 
             // Back to courses button
-            document.getElementById('backToCourses').addEventListener('click', function() {
+            document.getElementById('backToCourses').addEventListener('click', function () {
                 navigateTo('courses');
             });
 
             // Initialize animations
             animateCards();
-            
+
             // Show dashboard by default
             navigateTo('dashboard');
         });
@@ -996,10 +1107,10 @@
             Object.values(pages).forEach(page => {
                 page.classList.add('d-none');
             });
-            
+
             // Show the requested page
             pages[page].classList.remove('d-none');
-            
+
             // Update page title
             pageTitle.textContent = document.querySelector(`.sidebar-menu li a[data-page="${page}"]`).textContent.trim();
         }
@@ -1008,14 +1119,14 @@
         function loadCourse(courseId) {
             const course = coursesData[courseId];
             if (!course) return;
-            
+
             currentState.course = courseId;
             document.getElementById('courseDetailTitle').textContent = course.title;
-            
+
             // Load blogs list
             const blogContent = document.getElementById('blogContent');
             blogContent.innerHTML = '';
-            
+
             course.blogs.forEach(blog => {
                 const blogElement = document.createElement('div');
                 blogElement.className = 'blog-item mb-4';
@@ -1029,15 +1140,15 @@
                 `;
                 blogContent.appendChild(blogElement);
             });
-            
+
             // Add event listeners to test buttons
             document.querySelectorAll('.take-test').forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     const blogId = parseInt(this.getAttribute('data-blog'));
                     loadTest(courseId, blogId);
                 });
             });
-            
+
             // Show course detail page
             navigateTo('courseDetail');
         }
@@ -1046,20 +1157,20 @@
         function loadTest(courseId, blogId) {
             const course = coursesData[courseId];
             if (!course) return;
-            
+
             const blog = course.blogs.find(b => b.id === blogId);
             if (!blog || !blog.test) return;
-            
+
             currentState.blog = blogId;
-            
+
             // Show test container
             document.getElementById('testContainer').classList.remove('d-none');
             document.getElementById('blogContent').classList.add('d-none');
-            
+
             // Load test questions
             const testForm = document.getElementById('blogTestForm');
             testForm.innerHTML = '';
-            
+
             blog.test.questions.forEach((question, index) => {
                 const questionElement = document.createElement('div');
                 questionElement.className = 'question-card mb-3';
@@ -1074,44 +1185,44 @@
                 `;
                 testForm.appendChild(questionElement);
             });
-            
+
             // Add submit button
             const submitButton = document.createElement('button');
             submitButton.type = 'submit';
             submitButton.className = 'btn btn-primary mt-3';
             submitButton.innerHTML = '<i class="fas fa-paper-plane me-2"></i> إرسال الإجابات';
             testForm.appendChild(submitButton);
-            
+
             // Hide result alert
             document.getElementById('testResultAlert').style.display = 'none';
-            
+
             // Scroll to test
             document.getElementById('testContainer').scrollIntoView({ behavior: 'smooth' });
         }
 
         // Handle test submission
-        document.getElementById('blogTestForm').addEventListener('submit', function(e) {
+        document.getElementById('blogTestForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             const course = coursesData[currentState.course];
             if (!course) return;
-            
+
             const blog = course.blogs.find(b => b.id === currentState.blog);
             if (!blog || !blog.test) return;
-            
+
             // Calculate score
             let score = 0;
             const formData = new FormData(this);
-            
+
             blog.test.questions.forEach((question, index) => {
                 const answer = formData.get(`q${index}`);
                 if (answer && parseInt(answer) === question.correct) {
                     score++;
                 }
             });
-            
+
             const percentage = (score / blog.test.questions.length) * 100;
-            
+
             // Show result
             const resultAlert = document.getElementById('testResultAlert');
             resultAlert.innerHTML = `
@@ -1122,27 +1233,27 @@
                 </button>
             `;
             resultAlert.style.display = 'block';
-            
+
             // Add event listener to back button
-            document.getElementById('backToBlog').addEventListener('click', function() {
+            document.getElementById('backToBlog').addEventListener('click', function () {
                 document.getElementById('testContainer').classList.add('d-none');
                 document.getElementById('blogContent').classList.remove('d-none');
                 document.getElementById('testResultAlert').style.display = 'none';
             });
-            
+
             // Scroll to result
             resultAlert.scrollIntoView({ behavior: 'smooth' });
         });
 
         // Animate cards on load
         function animateCards() {
-            document.querySelectorAll('.animate-card').forEach((card, index) => {
+            document.querySelectorAll('.').forEach((card, index) => {
                 card.style.opacity = '0';
                 setTimeout(() => {
                     card.style.animation = `fadeIn 0.5s forwards ${index * 0.1}s`;
                 }, 100);
             });
-            
+
             // Animate progress bars
             setTimeout(() => {
                 document.querySelectorAll('.course-progress-bar').forEach(bar => {
@@ -1156,4 +1267,5 @@
         }
     </script>
 </body>
+
 </html>
