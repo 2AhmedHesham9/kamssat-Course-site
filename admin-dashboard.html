@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>لوحة التحكم الإدارية</title>
+    <!-- Bootstrap 5 RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tajawal Arabic Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f5f5f5;
+            < !-- padding-top: 56px;
+            -->
+            /* Space for mobile header */
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            background-color: var(--secondary-color);
+            color: white;
+            height: 100vh;
+            position: fixed;
+            padding-top: 20px;
+            width: 250px;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .sidebar .nav-link {
+            color: var(--light-color);
+            margin-bottom: 5px;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 0.9rem;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: var(--primary-color);
+        }
+
+        .sidebar .nav-link.active {
+            background-color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .sidebar .nav-link i {
+            width: 20px;
+            text-align: center;
+            margin-left: 5px;
+        }
+
+        .main-content {
+            margin-right: 250px;
+            padding: 20px;
+            transition: all 0.3s;
+            width: calc(100% - 250px);
+        }
+
+        /* Mobile Header */
+        .mobile-header {
+            display: none;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001;
+        }
+
+        .mobile-header .menu-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* Stats Cards */
+        .stat-card {
+            border-radius: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+            margin-bottom: 15px;
+            height: 100%;
+            padding: 15px;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card i {
+            font-size: 2rem;
+        }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .table th,
+        .table td {
+            vertical-align: middle;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 8px 15px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 0.75rem;
+        }
+
+        /* Forms */
+        .form-control,
+        .form-select {
+            padding: 10px 15px;
+            font-size: 0.9rem;
+        }
+
+        /* Modals */
+        .modal-dialog {
+            max-width: 95%;
+            margin: 10px auto;
+        }
+
+        /* Card styles */
+        .card {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eee;
+            padding: 15px 20px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1199.98px) {
+            .main-content {
+                padding: 15px;
+            }
+
+            .stat-card i {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            .sidebar {
+                right: -250px;
+            }
+
+            .sidebar.active {
+                right: 0;
+            }
+
+            .main-content {
+                margin-right: 0;
+                width: 100%;
+            }
+
+            .mobile-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .stat-card i {
+                font-size: 1.5rem;
+            }
+
+            .table-responsive {
+                border: 1px solid #dee2e6;
+                border-radius: 5px;
+            }
+
+            .btn-group {
+                flex-wrap: wrap;
+            }
+
+            .btn-group .btn {
+                margin-bottom: 5px;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .main-content {
+                padding: 15px 10px;
+            }
+
+            .modal-dialog {
+                width: 100%;
+                margin: 5px auto;
+            }
+
+            .stat-card {
+                padding: 12px;
+            }
+
+            .stat-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .table th,
+            .table td {
+                padding: 8px;
+                font-size: 0.85rem;
+            }
+
+            .card-header {
+                padding: 12px 15px;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            body {
+                padding-top: 50px;
+            }
+
+            .main-content {
+                padding: 10px 5px;
+            }
+
+            .modal-content {
+                border-radius: 0;
+            }
+
+            .table th,
+            .table td {
+                padding: 6px 4px;
+                font-size: 0.8rem;
+            }
+
+            .btn {
+                width: 100%;
+                margin-bottom: 5px;
+                padding: 6px 12px;
+            }
+
+            .btn-group .btn {
+                width: auto;
+            }
+
+            .stat-card {
+                padding: 10px;
+            }
+
+            .stat-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .stat-card i {
+                font-size: 1.3rem;
+            }
+
+            .card-header h5 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <button class="menu-toggle" onclick="toggleSidebar()">
+            <i class="fas fa-bars"></i>
+        </button>
+        <h5 class="mb-0">لوحة التحكم</h5>
+        <div style="width: 24px;"></div> <!-- Spacer for alignment -->
+    </div>
+
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="sidebar d-flex flex-column flex-shrink-0 p-3">
+            <a href="#"
+                class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none d-none d-lg-block">
+                <span class="fs-4">لوحة التحكم</span>
+            </a>
+            <hr class="d-none d-lg-block">
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="#dashboard" class="nav-link active" data-bs-toggle="tab">
+                        <i class="fas fa-tachometer-alt me-2"></i>
+                        الرئيسية
+                    </a>
+                </li>
+                <li>
+                    <a href="#courses" class="nav-link" data-bs-toggle="tab">
+                        <i class="fas fa-book me-2"></i>
+                        الدورات التدريبية
+                    </a>
+                </li>
+                <li>
+                    <a href="#users" class="nav-link" data-bs-toggle="tab">
+                        <i class="fas fa-users me-2"></i>
+                        المستخدمين
+                    </a>
+                </li>
+                <li>
+                    <a href="#emails" class="nav-link" data-bs-toggle="tab">
+                        <i class="fas fa-envelope me-2"></i>
+                        البريد الإلكتروني
+                    </a>
+                </li>
+            </ul>
+            <hr class="d-none d-lg-block">
+            <div class="dropdown d-none d-lg-block">
+                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                    id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://via.placeholder.com/50" alt="Admin" width="32" height="32"
+                        class="rounded-circle me-2">
+                    <strong>المدير</strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                    <li><a class="dropdown-item" href="#">الملف الشخصي</a></li>
+                    <li><a class="dropdown-item" href="#">الإعدادات</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">تسجيل الخروج</a></li>
+                </ul>
+            </div>
+
+            <!-- Mobile Profile -->
+            <div class="d-lg-none mt-auto">
+                <hr>
+                <div class="d-flex align-items-center text-white text-decoration-none">
+                    <img src="https://via.placeholder.com/50" alt="Admin" width="32" height="32"
+                        class="rounded-circle me-2">
+                    <strong>المدير</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="tab-content">
+                <!-- Dashboard Tab -->
+                <div class="tab-pane fade show active" id="dashboard">
+                    <h2 class="mb-4">لوحة التحكم الرئيسية</h2>
+
+                    <div class="row g-3">
+                        <div class="col-12 col-md-6 col-xl-4">
+                            <div class="stat-card bg-primary text-white rounded">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h3 id="courses-count">0</h3>
+                                        <p class="mb-0">الدورات المتاحة</p>
+                                    </div>
+                                    <i class="fas fa-book"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-xl-4">
+                            <div class="stat-card bg-success text-white rounded">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h3 id="users-count">0</h3>
+                                        <p class="mb-0">المستخدمين</p>
+                                    </div>
+                                    <i class="fas fa-users"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-xl-4">
+                            <div class="stat-card bg-info text-white rounded">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h3 id="emails-count">0</h3>
+                                        <p class="mb-0">البريد الإلكتروني</p>
+                                    </div>
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">آخر الدورات المضافة</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0" id="recent-courses">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th width="50">#</th>
+                                            <th>اسم الدورة</th>
+                                            <th>تاريخ الإضافة</th>
+                                            <th width="100">الأقسام</th>
+                                            <th width="120">الإجراءات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Courses Tab -->
+                <div class="tab-pane fade" id="courses">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+                        <h2 class="mb-3 mb-md-0">إدارة الدورات التدريبية</h2>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCourseModal">
+                            <i class="fas fa-plus me-2"></i>إضافة دورة جديدة
+                        </button>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0" id="courses-table">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th width="50">#</th>
+                                            <th>اسم الدورة</th>
+                                            <th width="100">الصورة</th>
+                                            <th width="100">الأقسام</th>
+                                            <th width="150">الإجراءات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Users Tab -->
+                <div class="tab-pane fade" id="users">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+                        <h2 class="mb-3 mb-md-0">إدارة المستخدمين</h2>
+                        <div class="d-flex flex-wrap">
+                            <button class="btn btn-primary me-2 mb-2 mb-md-0" data-bs-toggle="modal"
+                                data-bs-target="#addUserModal">
+                                <i class="fas fa-plus me-2"></i>إضافة مستخدم
+                            </button>
+                            <button class="btn btn-secondary" data-bs-toggle="modal"
+                                data-bs-target="#assignCourseModal">
+                                <i class="fas fa-book me-2"></i> تعيين دورة
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0" id="users-table">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th width="50">#</th>
+                                            <th>البريد الإلكتروني</th>
+                                            <th width="120">الدورات المسجلة</th>
+                                            <th width="150">الإجراءات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emails Tab -->
+                <div class="tab-pane fade" id="emails">
+                    <h2 class="mb-4">قائمة البريد الإلكتروني</h2>
+
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0" id="emails-table">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th width="50">#</th>
+                                            <th>البريد الإلكتروني</th>
+                                            <th width="120">تاريخ التسجيل</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Course Modal -->
+    <div class="modal fade" id="addCourseModal" tabindex="-1" aria-labelledby="addCourseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCourseModalLabel">إضافة دورة جديدة</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addCourseForm">
+                        <div class="mb-3">
+                            <label for="courseName" class="form-label">اسم الدورة</label>
+                            <input type="text" class="form-control" id="courseName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="courseImage" class="form-label">صورة الدورة</label>
+                            <input type="file" class="form-control" id="courseImage" accept="image/*">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">أقسام الدورة</label>
+                            <div id="courseSections">
+                                <div class="input-group mb-2">
+                                    <input type="text" class="form-control" placeholder="اسم القسم" required>
+                                    <button class="btn btn-outline-danger" type="button" onclick="removeSection(this)">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-secondary" onclick="addSection()">
+                                <i class="fas fa-plus me-1"></i>إضافة قسم
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary" onclick="saveCourse()">حفظ الدورة</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModalLabel">إضافة مستخدم جديد</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addUserForm">
+                        <div class="mb-3">
+                            <label for="userEmail" class="form-label">البريد الإلكتروني</label>
+                            <input type="email" class="form-control" id="userEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="userPassword" class="form-label">كلمة المرور</label>
+                            <input type="password" class="form-control" id="userPassword" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary" onclick="saveUser()">حفظ المستخدم</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Assign Course Modal -->
+    <div class="modal fade" id="assignCourseModal" tabindex="-1" aria-labelledby="assignCourseModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="assignCourseModalLabel">تعيين دورة لمستخدم</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="assignCourseForm">
+                        <div class="mb-3">
+                            <label for="selectUser" class="form-label">اختر المستخدم</label>
+                            <select class="form-select" id="selectUser" required>
+                                <option value="" selected disabled>اختر مستخدم</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="selectCourse" class="form-label">اختر الدورة</label>
+                            <select class="form-select" id="selectCourse" required>
+                                <option value="" selected disabled>اختر دورة</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary" onclick="assignCourse()">تعيين الدورة</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Course Details Modal -->
+    <div class="modal fade" id="courseDetailsModal" tabindex="-1" aria-labelledby="courseDetailsModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="courseDetailsModalLabel">تفاصيل الدورة</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-4 mb-4 mb-lg-0">
+                            <img id="courseDetailImage" src="" class="img-fluid rounded mb-3 w-100" alt="صورة الدورة">
+                            <h4 id="courseDetailName" class="text-center"></h4>
+                        </div>
+                        <div class="col-lg-8">
+                            <h5>أقسام الدورة</h5>
+                            <div class="accordion" id="sectionsAccordion">
+                                <!-- Sections will be added here by JavaScript -->
+                            </div>
+
+                            <button class="btn btn-sm btn-primary mt-3" onclick="addNewSection()">
+                                <i class="fas fa-plus me-1"></i>إضافة قسم جديد
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Section Content Modal -->
+    <div class="modal fade" id="sectionContentModal" tabindex="-1" aria-labelledby="sectionContentModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sectionContentModalLabel">إضافة محتوى للقسم</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="sectionContentForm">
+                        <input type="hidden" id="currentCourseId">
+                        <input type="hidden" id="currentSectionId">
+                        <div class="mb-3">
+                            <label class="form-label">نوع المحتوى</label>
+                            <select class="form-select" id="contentType" onchange="toggleContentFields()">
+                                <option value="blog">مدونة</option>
+                                <option value="quiz">اختبار</option>
+                            </select>
+                        </div>
+                        <div id="blogFields">
+                            <div class="mb-3">
+                                <label for="blogTitle" class="form-label">عنوان المدونة</label>
+                                <input type="text" class="form-control" id="blogTitle" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="blogContent" class="form-label">محتوى المدونة</label>
+                                <textarea class="form-control" id="blogContent" rows="5" required></textarea>
+                            </div>
+                        </div>
+                        <div id="quizFields" style="display: none;">
+                            <div class="mb-3">
+                                <label for="quizTitle" class="form-label">عنوان الاختبار</label>
+                                <input type="text" class="form-control" id="quizTitle" required>
+                            </div>
+                            <div id="quizQuestions">
+                                <div class="question-container mb-3 p-3 border rounded">
+                                    <div class="mb-3">
+                                        <label class="form-label">السؤال</label>
+                                        <input type="text" class="form-control question-text" placeholder="نص السؤال"
+                                            required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label">الخيارات</label>
+                                        <div class="options-container">
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-text">
+                                                    <input class="form-check-input correct-answer" type="radio"
+                                                        name="correctAnswer0" value="0" checked>
+                                                </div>
+                                                <input type="text" class="form-control option-text" placeholder="النص"
+                                                    required>
+                                                <button class="btn btn-outline-danger" type="button"
+                                                    onclick="removeOption(this)">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-sm btn-secondary"
+                                            onclick="addOption(this)">
+                                            <i class="fas fa-plus me-1"></i>إضافة خيار
+                                        </button>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-danger" onclick="removeQuestion(this)">
+                                        <i class="fas fa-trash me-1"></i>حذف السؤال
+                                    </button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-primary" onclick="addQuestion()">
+                                <i class="fas fa-plus me-1"></i>إضافة سؤال
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary" onclick="saveSectionContent()">حفظ المحتوى</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        // Sample data (in a real app, this would come from a backend API)
+        let courses = [
+            {
+                id: 1,
+                name: "دورة تطوير الويب",
+                image: "https://via.placeholder.com/300x200",
+                sections: [
+                    {
+                        id: 1,
+                        name: "مقدمة في HTML",
+                        blogs: [
+                            {
+                                title: "ما هي HTML؟",
+                                content: "لغة ترميز النص الفائق (HTML) هي اللغة الأساسية لإنشاء صفحات الويب..."
+                            }
+                        ],
+                        quiz: {
+                            title: "اختبار HTML الأساسي",
+                            questions: [
+                                {
+                                    question: "ماذا ترمز HTML؟",
+                                    options: [
+                                        "Hyper Text Markup Language",
+                                        "Home Tool Markup Language",
+                                        "Hyperlinks and Text Markup Language"
+                                    ],
+                                    correctAnswer: 0
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ];
+
+        let users = [
+            {
+                id: 1,
+                email: "user1@example.com",
+                password: "password123",
+                courses: [1]
+            }
+        ];
+
+        // Initialize the dashboard
+        $(document).ready(function () {
+            updateDashboardStats();
+            populateCoursesTable();
+            populateUsersTable();
+            populateEmailsTable();
+            populateRecentCourses();
+
+            // Populate user and course dropdowns in assign course modal
+            populateAssignCourseDropdowns();
+        });
+
+        // Toggle sidebar on mobile
+        function toggleSidebar() {
+            $('.sidebar').toggleClass('active');
+        }
+
+        // Close sidebar when clicking outside on mobile
+        $(document).on('click', function (e) {
+            if ($(window).width() <= 992) {
+                if (!$(e.target).closest('.sidebar').length && !$(e.target).closest('.menu-toggle').length) {
+                    $('.sidebar').removeClass('active');
+                }
+            }
+        });
+
+        function updateDashboardStats() {
+            $("#courses-count").text(courses.length);
+            $("#users-count").text(users.length);
+            $("#emails-count").text(users.length); // Assuming each user has one email
+        }
+
+        function populateCoursesTable() {
+            const tableBody = $("#courses-table tbody");
+            tableBody.empty();
+
+            courses.forEach((course, index) => {
+                const row = `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${course.name}</td>
+                        <td><img src="${course.image}" width="50" height="30" class="rounded"></td>
+                        <td>${course.sections ? course.sections.length : 0}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button class="btn btn-primary" onclick="viewCourseDetails(${course.id})">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-warning" onclick="editCourse(${course.id})">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger" onclick="deleteCourse(${course.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                tableBody.append(row);
+            });
+        }
+
+        function populateUsersTable() {
+            const tableBody = $("#users-table tbody");
+            tableBody.empty();
+
+            users.forEach((user, index) => {
+                const userCourses = user.courses ? user.courses.length : 0;
+                const row = `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${user.email}</td>
+                        <td>${userCourses}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button class="btn btn-primary" onclick="assignCourseToUser(${user.id})">
+                                    <i class="fas fa-book"></i>
+                                </button>
+                                <button class="btn btn-danger" onclick="deleteUser(${user.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                tableBody.append(row);
+            });
+        }
+
+        function populateEmailsTable() {
+            const tableBody = $("#emails-table tbody");
+            tableBody.empty();
+
+            users.forEach((user, index) => {
+                const row = `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${user.email}</td>
+                        <td>${new Date().toLocaleDateString()}</td>
+                    </tr>
+                `;
+                tableBody.append(row);
+            });
+        }
+
+        function populateRecentCourses() {
+            const tableBody = $("#recent-courses tbody");
+            tableBody.empty();
+
+            // Show only the last 5 courses
+            const recentCourses = courses.slice(-5).reverse();
+
+            recentCourses.forEach((course, index) => {
+                const row = `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${course.name}</td>
+                        <td>${new Date().toLocaleDateString()}</td>
+                        <td>${course.sections ? course.sections.length : 0}</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary" onclick="viewCourseDetails(${course.id})">
+                                <i class="fas fa-eye me-1"></i>عرض
+                            </button>
+                        </td>
+                    </tr>
+                `;
+                tableBody.append(row);
+            });
+        }
+
+        function populateAssignCourseDropdowns() {
+            const userSelect = $("#selectUser");
+            const courseSelect = $("#selectCourse");
+
+            userSelect.empty();
+            userSelect.append('<option value="" selected disabled>اختر مستخدم</option>');
+
+            courseSelect.empty();
+            courseSelect.append('<option value="" selected disabled>اختر دورة</option>');
+
+            users.forEach(user => {
+                userSelect.append(`<option value="${user.id}">${user.email}</option>`);
+            });
+
+            courses.forEach(course => {
+                courseSelect.append(`<option value="${course.id}">${course.name}</option>`);
+            });
+        }
+
+        function addSection() {
+            const sectionsContainer = $("#courseSections");
+            const sectionCount = sectionsContainer.children().length;
+
+            const newSection = `
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" placeholder="اسم القسم" required>
+                    <button class="btn btn-outline-danger" type="button" onclick="removeSection(this)">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+
+            sectionsContainer.append(newSection);
+        }
+
+        function removeSection(button) {
+            if ($("#courseSections").children().length > 1) {
+                $(button).parent().remove();
+            } else {
+                alert("يجب أن تحتوي الدورة على قسم واحد على الأقل");
+            }
+        }
+
+        function saveCourse() {
+            const courseName = $("#courseName").val();
+            const courseImage = $("#courseImage").val();
+
+            if (!courseName) {
+                alert("الرجاء إدخال اسم الدورة");
+                return;
+            }
+
+            // Get sections
+            const sections = [];
+            $("#courseSections .form-control").each(function () {
+                const sectionName = $(this).val();
+                if (sectionName) {
+                    sections.push({
+                        id: Date.now() + Math.floor(Math.random() * 1000),
+                        name: sectionName,
+                        blogs: [],
+                        quiz: null
+                    });
+                }
+            });
+
+            if (sections.length === 0) {
+                alert("الرجاء إدخال قسم واحد على الأقل");
+                return;
+            }
+
+            // Create new course
+            const newCourse = {
+                id: Date.now(),
+                name: courseName,
+                image: courseImage || "https://via.placeholder.com/300x200",
+                sections: sections
+            };
+
+            courses.push(newCourse);
+
+            // Close modal and reset form
+            $("#addCourseModal").modal("hide");
+            $("#addCourseForm")[0].reset();
+            $("#courseSections").empty();
+            addSection(); // Add one default section
+
+            // Update tables
+            populateCoursesTable();
+            populateRecentCourses();
+            updateDashboardStats();
+            populateAssignCourseDropdowns();
+
+            alert("تم حفظ الدورة بنجاح");
+        }
+
+        function saveUser() {
+            const email = $("#userEmail").val();
+            const password = $("#userPassword").val();
+
+            if (!email || !password) {
+                alert("الرجاء إدخال البريد الإلكتروني وكلمة المرور");
+                return;
+            }
+
+            // Check if email already exists
+            if (users.some(user => user.email === email)) {
+                alert("هذا البريد الإلكتروني مسجل بالفعل");
+                return;
+            }
+
+            // Create new user
+            const newUser = {
+                id: Date.now(),
+                email: email,
+                password: password,
+                courses: []
+            };
+
+            users.push(newUser);
+
+            // Close modal and reset form
+            $("#addUserModal").modal("hide");
+            $("#addUserForm")[0].reset();
+
+            // Update tables
+            populateUsersTable();
+            populateEmailsTable();
+            updateDashboardStats();
+            populateAssignCourseDropdowns();
+
+            alert("تم حفظ المستخدم بنجاح");
+        }
+
+        function assignCourseToUser(userId) {
+            $("#selectUser").val(userId);
+            $("#assignCourseModal").modal("show");
+        }
+
+        function assignCourse() {
+            const userId = parseInt($("#selectUser").val());
+            const courseId = parseInt($("#selectCourse").val());
+
+            if (!userId || !courseId) {
+                alert("الرجاء اختيار مستخدم ودورة");
+                return;
+            }
+
+            const user = users.find(u => u.id === userId);
+            if (!user) {
+                alert("المستخدم غير موجود");
+                return;
+            }
+
+            if (!user.courses) {
+                user.courses = [];
+            }
+
+            if (user.courses.includes(courseId)) {
+                alert("هذا المستخدم مسجل بالفعل في هذه الدورة");
+                return;
+            }
+
+            user.courses.push(courseId);
+
+            // Close modal and reset form
+            $("#assignCourseModal").modal("hide");
+            $("#assignCourseForm")[0].reset();
+
+            // Update tables
+            populateUsersTable();
+
+            alert("تم تعيين الدورة للمستخدم بنجاح");
+        }
+
+        function viewCourseDetails(courseId) {
+            const course = courses.find(c => c.id === courseId);
+            if (!course) {
+                alert("الدورة غير موجودة");
+                return;
+            }
+
+            $("#courseDetailName").text(course.name);
+            $("#courseDetailImage").attr("src", course.image);
+
+            const accordion = $("#sectionsAccordion");
+            accordion.empty();
+
+            if (course.sections && course.sections.length > 0) {
+                course.sections.forEach((section, index) => {
+                    const sectionId = `section-${section.id}`;
+                    const accordionItem = `
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading-${section.id}">
+                                <button class="accordion-button ${index === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#${sectionId}" aria-expanded="${index === 0 ? 'true' : 'false'}" aria-controls="${sectionId}">
+                                    ${section.name}
+                                </button>
+                            </h2>
+                            <div id="${sectionId}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" aria-labelledby="heading-${section.id}" data-bs-parent="#sectionsAccordion">
+                                <div class="accordion-body">
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <h6>محتوى القسم</h6>
+                                        <button class="btn btn-sm btn-primary" onclick="openAddContentModal(${course.id}, ${section.id})">
+                                            <i class="fas fa-plus me-1"></i>إضافة محتوى
+                                        </button>
+                                    </div>
+                                    
+                                    ${renderSectionContent(section)}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    accordion.append(accordionItem);
+                });
+            } else {
+                accordion.append('<p class="text-muted">لا توجد أقسام لهذه الدورة</p>');
+            }
+
+            $("#courseDetailsModal").modal("show");
+        }
+
+        function renderSectionContent(section) {
+            let contentHtml = '';
+
+            // Render blogs
+            if (section.blogs && section.blogs.length > 0) {
+                contentHtml += '<h6 class="mt-3">المدونات</h6><ul class="list-group">';
+                section.blogs.forEach(blog => {
+                    contentHtml += `
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            ${blog.title}
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-warning">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </li>
+                    `;
+                });
+                contentHtml += '</ul>';
+            }
+
+            // Render quiz
+            if (section.quiz) {
+                contentHtml += `
+                    <h6 class="mt-3">الاختبارات</h6>
+                    <div class="card">
+                        <div class="card-body">
+                            <h6>${section.quiz.title}</h6>
+                            <p>عدد الأسئلة: ${section.quiz.questions.length}</p>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-eye me-1"></i> عرض
+                                </button>
+                                <button class="btn btn-warning">
+                                    <i class="fas fa-edit me-1"></i> تعديل
+                                </button>
+                                <button class="btn btn-danger">
+                                    <i class="fas fa-trash me-1"></i> حذف
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (!contentHtml) {
+                contentHtml = '<p class="text-muted">لا يوجد محتوى لهذا القسم بعد</p>';
+            }
+
+            return contentHtml;
+        }
+
+        function openAddContentModal(courseId, sectionId) {
+            $("#currentCourseId").val(courseId);
+            $("#currentSectionId").val(sectionId);
+            $("#sectionContentForm")[0].reset();
+            $("#quizFields").hide();
+            $("#blogFields").show();
+            $("#sectionContentModal").modal("show");
+        }
+
+        function toggleContentFields() {
+            const contentType = $("#contentType").val();
+
+            if (contentType === "blog") {
+                $("#quizFields").hide();
+                $("#blogFields").show();
+            } else {
+                $("#blogFields").hide();
+                $("#quizFields").show();
+            }
+        }
+
+        function addNewSection() {
+            const courseId = parseInt($("#currentCourseId").val());
+            const course = courses.find(c => c.id === courseId);
+
+            if (!course) return;
+
+            const sectionName = prompt("أدخل اسم القسم الجديد:");
+            if (!sectionName) return;
+
+            if (!course.sections) {
+                course.sections = [];
+            }
+
+            const newSection = {
+                id: Date.now(),
+                name: sectionName,
+                blogs: [],
+                quiz: null
+            };
+
+            course.sections.push(newSection);
+
+            // Refresh the modal view
+            viewCourseDetails(courseId);
+        }
+
+        function addQuestion() {
+            const questionCount = $("#quizQuestions .question-container").length;
+
+            const newQuestion = `
+                <div class="question-container mb-3 p-3 border rounded">
+                    <div class="mb-3">
+                        <label class="form-label">السؤال</label>
+                        <input type="text" class="form-control question-text" placeholder="نص السؤال" required>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">الخيارات</label>
+                        <div class="options-container">
+                            <div class="input-group mb-2">
+                                <div class="input-group-text">
+                                    <input class="form-check-input correct-answer" type="radio" name="correctAnswer${questionCount}" value="0" checked>
+                                </div>
+                                <input type="text" class="form-control option-text" placeholder="النص" required>
+                                <button class="btn btn-outline-danger" type="button" onclick="removeOption(this)">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-secondary" onclick="addOption(this)">
+                            <i class="fas fa-plus me-1"></i>إضافة خيار
+                        </button>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-danger" onclick="removeQuestion(this)">
+                        <i class="fas fa-trash me-1"></i>حذف السؤال
+                    </button>
+                </div>
+            `;
+
+            $("#quizQuestions").append(newQuestion);
+        }
+
+        function removeQuestion(button) {
+            if ($("#quizQuestions .question-container").length > 1) {
+                $(button).closest(".question-container").remove();
+            } else {
+                alert("يجب أن يحتوي الاختبار على سؤال واحد على الأقل");
+            }
+        }
+
+        function addOption(button) {
+            const questionContainer = $(button).closest(".question-container");
+            const optionsContainer = questionContainer.find(".options-container");
+            const questionIndex = $("#quizQuestions .question-container").index(questionContainer);
+            const optionCount = questionContainer.find(".input-group").length;
+
+            const newOption = `
+                <div class="input-group mb-2">
+                    <div class="input-group-text">
+                        <input class="form-check-input correct-answer" type="radio" name="correctAnswer${questionIndex}" value="${optionCount}">
+                    </div>
+                    <input type="text" class="form-control option-text" placeholder="النص" required>
+                    <button class="btn btn-outline-danger" type="button" onclick="removeOption(this)">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+
+            optionsContainer.append(newOption);
+        }
+
+        function removeOption(button) {
+            const optionsContainer = $(button).closest(".options-container");
+            if (optionsContainer.children().length > 1) {
+                $(button).closest(".input-group").remove();
+            } else {
+                alert("يجب أن يحتوي السؤال على خيار واحد على الأقل");
+            }
+        }
+
+        function saveSectionContent() {
+            const courseId = parseInt($("#currentCourseId").val());
+            const sectionId = parseInt($("#currentSectionId").val());
+            const contentType = $("#contentType").val();
+
+            const course = courses.find(c => c.id === courseId);
+            if (!course) return;
+
+            const section = course.sections.find(s => s.id === sectionId);
+            if (!section) return;
+
+            if (contentType === "blog") {
+                const blogTitle = $("#blogTitle").val();
+                const blogContent = $("#blogContent").val();
+
+                if (!blogTitle || !blogContent) {
+                    alert("الرجاء إدخال عنوان ومحتوى المدونة");
+                    return;
+                }
+
+                if (!section.blogs) {
+                    section.blogs = [];
+                }
+
+                section.blogs.push({
+                    title: blogTitle,
+                    content: blogContent
+                });
+            } else {
+                const quizTitle = $("#quizTitle").val();
+                if (!quizTitle) {
+                    alert("الرجاء إدخال عنوان الاختبار");
+                    return;
+                }
+
+                const questions = [];
+                $("#quizQuestions .question-container").each(function () {
+                    const questionText = $(this).find(".question-text").val();
+                    if (!questionText) return;
+
+                    const options = [];
+                    $(this).find(".option-text").each(function (index) {
+                        const optionText = $(this).val();
+                        if (optionText) {
+                            options.push(optionText);
+                        }
+                    });
+
+                    if (options.length === 0) return;
+
+                    const correctAnswer = parseInt($(this).find(".correct-answer:checked").val());
+                    if (isNaN(correctAnswer)) {
+                        alert("الرجاء تحديد الإجابة الصحيحة لكل سؤال");
+                        return;
+                    }
+
+                    questions.push({
+                        question: questionText,
+                        options: options,
+                        correctAnswer: correctAnswer
+                    });
+                });
+
+                if (questions.length === 0) {
+                    alert("الرجاء إدخال سؤال واحد على الأقل");
+                    return;
+                }
+
+                section.quiz = {
+                    title: quizTitle,
+                    questions: questions
+                };
+            }
+
+            // Close modal
+            $("#sectionContentModal").modal("hide");
+
+            // Refresh the course details view
+            viewCourseDetails(courseId);
+
+            alert("تم حفظ المحتوى بنجاح");
+        }
+
+        function editCourse(courseId) {
+            // Implementation for editing a course
+            alert("سيتم تنفيذ تعديل الدورة هنا");
+        }
+
+        function deleteCourse(courseId) {
+            if (confirm("هل أنت متأكد من حذف هذه الدورة؟")) {
+                courses = courses.filter(c => c.id !== courseId);
+                populateCoursesTable();
+                populateRecentCourses();
+                updateDashboardStats();
+                populateAssignCourseDropdowns();
+                alert("تم حذف الدورة بنجاح");
+            }
+        }
+
+        function deleteUser(userId) {
+            if (confirm("هل أنت متأكد من حذف هذا المستخدم؟")) {
+                users = users.filter(u => u.id !== userId);
+                populateUsersTable();
+                populateEmailsTable();
+                updateDashboardStats();
+                populateAssignCourseDropdowns();
+                alert("تم حذف المستخدم بنجاح");
+            }
+        }
+    </script>
+</body>
+
+</html>
